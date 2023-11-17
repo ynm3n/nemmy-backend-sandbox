@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy # https://docs.docker.jp/compose/compose-file/index.html#compose-spec-dpends-on-long-syntax
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: rebuild
+          path: ./cmd
+  db:
+    image: postgres:latest
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: "psql -U ${POSTGRES_USER}"
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  # create_table:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.table
+  #   profiles:
+  #     - create_table
+  #   depends_on:
+  #     db:
+  #       condition: service_started
+  #   env_file:
+  #     - .env
+
+volumes:
+  db-data:

@@ -1,0 +1,20 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  up:
+    cmds:
+      - docker compose up
+
+  down:
+    cmds:
+      - docker compose down
+
+  build:
+    cmds:
+      - docker compose --profile create_table build --no-cache
+
+  psql:
+    cmds:
+      - docker compose exec db psql -h localhost -d $POSTGRES_USER -U $POSTGRES_USER

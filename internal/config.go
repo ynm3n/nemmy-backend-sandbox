@@ -1,0 +1,17 @@
+package internal
+
+import "github.com/caarlos0/env/v10"
+
+type Config struct {
+	DBUser     string `env:"POSTGRES_USER" envDefault:"postgres"`
+	DBPassword string `env:"POSTGRES_PASSWORD,required"`
+	Port       string `env:"PORT,required"`
+}
+
+func GetConfig() (*Config, error) {
+	cfg := new(Config)
+	if err := env.Parse(cfg); err != nil {
+		return nil, err
+	}
+	return cfg, nil
+}
