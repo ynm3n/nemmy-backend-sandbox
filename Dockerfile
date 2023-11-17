@@ -11,5 +11,5 @@ RUN --mount=type=cache,target=/go/pkg/mod \
 FROM debian:stable-slim AS deploy
 WORKDIR /app
 COPY --from=builder /build/server .
-EXPOSE 8080
+# EXPOSE 8080
 CMD [ "./server" ]

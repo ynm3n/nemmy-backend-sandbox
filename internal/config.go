@@ -5,7 +5,7 @@ import "github.com/caarlos0/env/v10"
 type Config struct {
 	DBUser     string `env:"POSTGRES_USER" envDefault:"postgres"`
 	DBPassword string `env:"POSTGRES_PASSWORD,required"`
-	Port       string `env:"PORT,required"`
+	Port       string `env:"APP_CONTAINER_PORT,required"`
 }
 
 func GetConfig() (*Config, error) {

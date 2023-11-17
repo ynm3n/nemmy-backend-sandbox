@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "${APP_HOST_PORT}:${APP_CONTAINER_PORT}"
     depends_on:
       db:
         condition: service_healthy # https://docs.docker.jp/compose/compose-file/index.html#compose-spec-dpends-on-long-syntax
