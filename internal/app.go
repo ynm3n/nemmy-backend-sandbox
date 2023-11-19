@@ -3,6 +3,8 @@ package internal
 import (
 	"context"
 	"fmt"
+
+	"github.com/labstack/echo/v4"
 )
 
 func RunApp(ctx context.Context) error {
@@ -11,19 +13,16 @@ func RunApp(ctx context.Context) error {
 		return err
 	}
 
-	db, err := NewDB(ctx, cfg)
+	// db, err := NewDB(ctx, cfg)
+	// if err != nil {
+	// 	return err
+	// }
 	// defer db.Close()
-	if err != nil {
-		return err
-	}
 
-	r, err := NewRouter(ctx, db)
-	if err != nil {
-		return err
-	}
-
-	p := fmt.Sprintf("0.0.0.0:%v", cfg.Port)
-	if err := r.Start(p); err != nil {
+	e := echo.New()
+	RegisterRoute(e)
+	addr := fmt.Sprintf("0.0.0.0:%v", cfg.Port)
+	if err := e.Start(addr); err != nil {
 		return err
 	}
 

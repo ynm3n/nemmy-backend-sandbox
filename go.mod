@@ -8,6 +8,7 @@ require (
 	github.com/uptrace/bun v1.1.16
 	github.com/uptrace/bun/dialect/pgdialect v1.1.16
 	github.com/uptrace/bun/driver/pgdriver v1.1.16
+	golang.org/x/sync v0.5.0
 )
 
 require (
