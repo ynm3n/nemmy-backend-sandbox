@@ -24,7 +24,7 @@ func getUser(c echo.Context) error {
 	// 本来ならここでDBにアクセスしてユーザー情報を取得する
 	res := struct {
 		UserID   int    `json:"userId"`
-		UserName string `json:"userName"`
+		UserName string `json:"username"`
 	}{
 		UserID:   id,
 		UserName: usernames[id%4],
