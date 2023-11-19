@@ -3,6 +3,10 @@ package internal
 import (
 	"context"
 	"fmt"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func RunApp(ctx context.Context) error {
@@ -11,19 +15,21 @@ func RunApp(ctx context.Context) error {
 		return err
 	}
 
-	db, err := NewDB(ctx, cfg)
+	// db, err := NewDB(ctx, cfg)
+	// if err != nil {
+	// 	return err
+	// }
 	// defer db.Close()
-	if err != nil {
-		return err
-	}
 
-	r, err := NewRouter(ctx, db)
-	if err != nil {
-		return err
-	}
+	e := echo.New()
+	RegisterRoute(e)
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000"},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 
-	p := fmt.Sprintf("0.0.0.0:%v", cfg.Port)
-	if err := r.Start(p); err != nil {
+	addr := fmt.Sprintf("0.0.0.0:%v", cfg.Port)
+	if err := e.Start(addr); err != nil {
 		return err
 	}
 
