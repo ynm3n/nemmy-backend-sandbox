@@ -24,7 +24,7 @@ func RunApp(ctx context.Context) error {
 	e := echo.New()
 	RegisterRoute(e)
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000"},
+		AllowOrigins: []string{cfg.FrontendURL},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 
