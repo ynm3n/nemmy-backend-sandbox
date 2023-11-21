@@ -1,6 +1,6 @@
-version: '3'
+version: "3"
 
-dotenv: ['.env']
+dotenv: [".env"]
 
 tasks:
   up:
@@ -13,7 +13,7 @@ tasks:
 
   build:
     cmds:
-      - docker compose --profile create_table build --no-cache
+      - docker compose build --no-cache
 
   psql:
     cmds:

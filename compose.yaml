@@ -29,17 +29,5 @@ services:
       retries: 5
       start_period: 1s
 
-  # create_table:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.table
-  #   profiles:
-  #     - create_table
-  #   depends_on:
-  #     db:
-  #       condition: service_started
-  #   env_file:
-  #     - .env
-
 volumes:
   db-data:
