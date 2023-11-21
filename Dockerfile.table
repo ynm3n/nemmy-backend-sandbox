@@ -1,9 +1,0 @@
-# syntax=docker/dockerfile:1
-FROM golang:latest AS builder
-WORKDIR /work
-COPY . .
-RUN go build -ldflags="-s -w" -trimpath -o createtable ./cmd/table/main.go
-
-FROM debian:stable-slim
-COPY --from=builder /work/createtable .
-CMD [ "./createtable" ]
