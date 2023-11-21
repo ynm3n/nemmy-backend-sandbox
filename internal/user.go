@@ -1,12 +1,18 @@
 package internal
 
-import "github.com/uptrace/bun"
+import (
+	"time"
+
+	"github.com/uptrace/bun"
+)
 
 type User struct {
-	bun.BaseModel `bun:"table:users"` // デフォルトでも同じテーブル名になりそうなのでこのタグは不要かも
+	bun.BaseModel `bun:"table:users"`
 
-	ID    string `bun:",pk,nullzero,notnull"`
-	Name  string `bun:",nullzero,notnull"`
-	Email string `bun:",nullzero,notnull"`
-	Age   int
+	ID    int64  `json:"userid" bun:"id,pk,nullzero,notnull"`
+	Name  string `json:"username" bun:",nullzero,notnull"`
+	Email string `json:"email" bun:",nullzero,notnull"`
+
+	CreatedAt time.Time `json:"createdAt" bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt time.Time `json:"updatedAt" bun:",nullzero,notnull,default:current_timestamp"`
 }
