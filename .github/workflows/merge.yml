@@ -14,10 +14,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Merge main into development
+      - name: Merge main into develop
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'github-actions@github.com'
-          git checkout development
+          git checkout develop
           git merge main
-          git push origin development
+          git push origin develop
