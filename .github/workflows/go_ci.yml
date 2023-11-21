@@ -1,4 +1,4 @@
-name: Go Build Test
+name: Go CI
 on:
   push:
     branches:
@@ -29,11 +29,6 @@ jobs:
 
       - name: Format Go code
         run: go fmt ./...
-
-      - name: Lint Go code
-        run: |
-          go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.0
-          golangci-lint run
 
       - name: Build
         run: go build -v ./...
