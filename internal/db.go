@@ -10,8 +10,7 @@ import (
 	"github.com/uptrace/bun/driver/pgdriver"
 )
 
-func NewDB(ctx context.Context, cfg *Config) (*bun.DB, error) {
-	dsn := buildDSN(cfg)
+func NewDB(ctx context.Context, dsn string) (*bun.DB, error) {
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 	if err := sqldb.PingContext(ctx); err != nil {
 		return nil, err
@@ -20,6 +19,6 @@ func NewDB(ctx context.Context, cfg *Config) (*bun.DB, error) {
 	return db, nil
 }
 
-func buildDSN(cfg *Config) string {
+func BuildDSN(cfg *Config) string {
 	return fmt.Sprintf("postgres://%[1]v:%[2]v@db/%[1]v?sslmode=disable", cfg.DBUser, cfg.DBPassword)
 }
