@@ -15,7 +15,8 @@ func RunApp(ctx context.Context) error {
 		return err
 	}
 
-	// db, err := NewDB(ctx, cfg)
+	// dsn := internal.BuildDSN(cfg)
+	// db, err := NewDB(ctx, dsn)
 	// if err != nil {
 	// 	return err
 	// }
