@@ -15,12 +15,15 @@ func RunApp(ctx context.Context) error {
 		return err
 	}
 
-	// dsn := internal.BuildDSN(cfg)
-	// db, err := NewDB(ctx, dsn)
-	// if err != nil {
-	// 	return err
-	// }
-	// defer db.Close()
+	models := []any{ // 新しいテーブル(モデル)を作ったらここに書きましょう
+		(*User)(nil),
+		// (*NewModelType)(nil),
+	}
+	db, err := NewDB(ctx, BuildDSN(cfg), models)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
 
 	e := echo.New()
 	RegisterRoute(e)

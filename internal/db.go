@@ -10,12 +10,15 @@ import (
 	"github.com/uptrace/bun/driver/pgdriver"
 )
 
-func NewDB(ctx context.Context, dsn string) (*bun.DB, error) {
+func NewDB(ctx context.Context, dsn string, models []any) (*bun.DB, error) {
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 	if err := sqldb.PingContext(ctx); err != nil {
 		return nil, err
 	}
 	db := bun.NewDB(sqldb, pgdialect.New())
+	if err := db.ResetModel(ctx, models...); err != nil {
+		return nil, err
+	}
 	return db, nil
 }
 
