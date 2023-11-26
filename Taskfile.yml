@@ -5,7 +5,15 @@ dotenv: [".env"]
 tasks:
   up:
     cmds:
+      - docker compose up -d
+    deps:
+      - build
+
+  up-a:
+    cmds:
       - docker compose up
+    deps:
+      - build
 
   down:
     cmds:
@@ -13,7 +21,12 @@ tasks:
 
   build:
     cmds:
-      - docker compose build --no-cache
+      - docker compose build
+    sources:
+      - cmd/**/*.go
+      - internal/**/*
+      - Dockerfile
+      - .env
 
   psql:
     cmds:
