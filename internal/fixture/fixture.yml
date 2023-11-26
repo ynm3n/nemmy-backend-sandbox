@@ -1,0 +1,11 @@
+- model: User
+  rows:
+    - username: light_planck
+      display_name: らいと
+      email: light.planck@dummy.mail
+    - username: tokugawa_ieyasu
+      display_name: 家康
+      email: ieyasu@tokugawa.com
+    - username: john
+      display_name: john
+      email: john@j.j

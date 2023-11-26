@@ -19,7 +19,7 @@ func RunApp(ctx context.Context) error {
 		(*User)(nil),
 		// (*NewModelType)(nil),
 	}
-	db, err := NewDB(ctx, BuildDSN(cfg), models)
+	db, err := RecreateDB(ctx, BuildDSN(cfg), models)
 	if err != nil {
 		return err
 	}
