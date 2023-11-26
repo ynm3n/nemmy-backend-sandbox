@@ -1,8 +1,10 @@
 package internal
 
 import (
+	"net/http"
 	"time"
 
+	"github.com/labstack/echo/v4"
 	"github.com/uptrace/bun"
 )
 
@@ -16,4 +18,22 @@ type User struct {
 
 	CreatedAt time.Time `json:"createdAt" bun:",nullzero,notnull,default:current_timestamp"`
 	UpdatedAt time.Time `json:"updatedAt" bun:",nullzero,notnull,default:current_timestamp"`
+}
+
+func (h *Handler) GetUser(c echo.Context) error {
+	p := c.Param("username")
+
+	var u User
+	err := h.DB.NewSelect().
+		Model(&u).
+		Where("username = ?", p).
+		Scan(c.Request().Context())
+	if err != nil {
+		return err
+	}
+
+	if err := c.JSON(http.StatusOK, u); err != nil {
+		return err
+	}
+	return nil
 }

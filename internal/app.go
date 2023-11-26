@@ -3,10 +3,6 @@ package internal
 import (
 	"context"
 	"fmt"
-	"net/http"
-
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 )
 
 func RunApp(ctx context.Context) error {
@@ -25,12 +21,7 @@ func RunApp(ctx context.Context) error {
 	}
 	defer db.Close()
 
-	e := echo.New()
-	RegisterRoute(e)
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{cfg.FrontendURL},
-		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
-	}))
+	e := NewEcho(cfg, db)
 
 	addr := fmt.Sprintf("0.0.0.0:%v", cfg.Port)
 	if err := e.Start(addr); err != nil {
