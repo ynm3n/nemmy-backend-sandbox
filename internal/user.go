@@ -11,13 +11,15 @@ import (
 type User struct {
 	bun.BaseModel `bun:"table:users"`
 
-	ID          int64  `bun:",pk,autoincrement"`
-	Username    string `json:"username" bun:",unique,nullzero,notnull"`
-	DisplayName string `json:"displayName" bun:",nullzero,notnull"`
-	Email       string `json:"email" bun:",unique,nullzero,notnull"`
+	ID              int64  `json:"-" bun:",pk,autoincrement"`
+	Username        string `json:"username" bun:",unique,nullzero,notnull,type:varchar(255)"`
+	DisplayName     string `json:"displayName" bun:",nullzero,notnull,type:varchar(255)"`
+	ProfileImageURL string `json:"profileImageUrl" bun:",type:varchar(255)"`
 
-	CreatedAt time.Time `json:"createdAt" bun:",nullzero,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `json:"updatedAt" bun:",nullzero,notnull,default:current_timestamp"`
+	CreatedAt time.Time `json:"-" bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt time.Time `json:"-" bun:",nullzero,notnull,default:current_timestamp"`
+
+	Subjects []*Subject `json:"-" bun:"rel:has-many,join:id=user_id"`
 }
 
 func (h *Handler) GetUser(c echo.Context) error {
