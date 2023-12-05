@@ -1,11 +1,40 @@
 - model: User
   rows:
-    - username: light_planck
+    - _id: light
+      username: light_planck
       display_name: らいと
-      email: light.planck@dummy.mail
-    - username: tokugawa_ieyasu
-      display_name: 家康
-      email: ieyasu@tokugawa.com
-    - username: john
+    - _id: ieyasu
+      username: tokugawa_ieyasu
+      display_name: 家康🫠
+    - _id: john
+      username: john
       display_name: john
-      email: john@j.j
+
+- model: Subject
+  rows:
+    - _id: light_go
+      user_id: '{{ $.User.light.ID }}'
+      name: Go言語プログラミングエッセンス
+      description: Go楽しい
+    - _id: light_nemmy
+      user_id: '{{ $.User.light.ID }}'
+      name: nemmy
+    - _id: ieyasu_kyopro
+      user_id: '{{ $.User.ieyasu.ID }}'
+      name: 競プロ 精進
+      description: ダイクストラなんもわからん
+
+- model: Record
+  rows:
+    - subject_id: '{{ $.Subject.light_go.ID }}'
+      started_at: '{{ now }}'
+      duration: '{{ 100 }}'
+    - subject_id: '{{ $.Subject.ieyasu_kyopro.ID }}'
+      started_at: '{{ now }}'
+      duration: '{{ 14567898700 }}'
+    - subject_id: '{{ $.Subject.ieyasu_kyopro.ID }}'
+      started_at: '{{ now }}'
+      duration: '{{ 0 }}'
+    - subject_id: '{{ $.Subject.ieyasu_kyopro.ID }}'
+      started_at: '{{ now }}'
+      duration: '{{ 23178521520 }}'

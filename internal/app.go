@@ -13,6 +13,8 @@ func RunApp(ctx context.Context) error {
 
 	models := []any{ // 新しいテーブル(モデル)を作ったらここに書きましょう
 		(*User)(nil),
+		(*Subject)(nil),
+		(*Record)(nil),
 		// (*NewModelType)(nil),
 	}
 	db, err := RecreateDB(ctx, BuildDSN(cfg), models)
