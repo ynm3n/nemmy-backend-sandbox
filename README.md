@@ -1,6 +1,13 @@
+# Requirement
+<!-- - Go -->
+- Docker
+- Docker Compose
+- [Task](https://taskfile.dev/)
+
+
 # Usage
 1. create `.env` file
-   1. `mv .env.example .env`
-2. `docker compose up`
-3. `curl localhost:${PORT}/api/users/:userId`
-   1. IDは0以上100未満の整数のみ指定可能
+   1. `cp .env.example .env`
+2. `task up`
+   - or `task up-a` (no detach option)
+3. `curl localhost:${PORT}/api/users/:username`
