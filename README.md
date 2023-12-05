@@ -4,7 +4,6 @@
 - Docker Compose
 - [Task](https://taskfile.dev/)
 
-
 # Usage
 1. create `.env` file
    1. `cp .env.example .env`
