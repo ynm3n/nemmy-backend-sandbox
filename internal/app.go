@@ -3,6 +3,8 @@ package internal
 import (
 	"context"
 	"fmt"
+
+	"github.com/ynm3n/go-bun-exercise/internal/models"
 )
 
 func RunApp(ctx context.Context) error {
@@ -12,9 +14,9 @@ func RunApp(ctx context.Context) error {
 	}
 
 	models := []any{ // 新しいテーブル(モデル)を作ったらここに書きましょう
-		(*User)(nil),
-		(*Subject)(nil),
-		(*Record)(nil),
+		(*models.User)(nil),
+		(*models.Subject)(nil),
+		(*models.Record)(nil),
 		// (*NewModelType)(nil),
 	}
 	db, err := RecreateDB(ctx, BuildDSN(cfg), models)
