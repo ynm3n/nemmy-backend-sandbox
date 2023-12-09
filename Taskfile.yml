@@ -31,3 +31,8 @@ tasks:
   psql:
     cmds:
       - docker compose exec db psql -h localhost -d $POSTGRES_USER -U $POSTGRES_USER
+
+  migrate:create:
+    desc: Create a bun migration file(Go). A migration name passed as an argument is required.
+    cmds:
+      - go run cmd/migration/create/main.go --name {{.CLI_ARGS}}
