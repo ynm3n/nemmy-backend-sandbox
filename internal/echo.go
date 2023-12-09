@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/uptrace/bun"
+	"github.com/ynm3n/go-bun-exercise/internal/models"
 )
 
 func NewEcho(cfg *Config, db *bun.DB) *echo.Echo {
@@ -25,4 +26,22 @@ func NewEcho(cfg *Config, db *bun.DB) *echo.Echo {
 
 type Handler struct {
 	DB *bun.DB
+}
+
+func (h *Handler) GetUser(c echo.Context) error {
+	p := c.Param("username")
+
+	var u models.User
+	err := h.DB.NewSelect().
+		Model(&u).
+		Where("username = ?", p).
+		Scan(c.Request().Context())
+	if err != nil {
+		return err
+	}
+
+	if err := c.JSON(http.StatusOK, u); err != nil {
+		return err
+	}
+	return nil
 }
