@@ -6,7 +6,6 @@ require (
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/labstack/echo/v4 v4.11.3
 	github.com/uptrace/bun v1.1.16
-	github.com/uptrace/bun/dbfixture v1.1.16
 	github.com/uptrace/bun/dialect/pgdialect v1.1.16
 	github.com/uptrace/bun/driver/pgdriver v1.1.16
 	github.com/uptrace/bun/extra/bundebug v1.0.20
@@ -33,6 +32,5 @@ require (
 	golang.org/x/sys v0.14.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 	mellium.im/sasl v0.3.1 // indirect
 )
