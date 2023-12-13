@@ -15,6 +15,9 @@ jobs:
         with:
           args: >
             ${{ github.actor }}さんが以下のPRを出しました。
+
             ${{ github.event.pull_request.html_url }}
+
             ${{ github.event.pull_request.title }}
+
             ${{ github.event.pull_request.body }}
