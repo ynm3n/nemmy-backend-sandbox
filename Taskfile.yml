@@ -35,4 +35,4 @@ tasks:
   migrate:create:
     desc: Create a bun migration file(Go). A migration name passed as an argument is required.
     cmds:
-      - go run cmd/migration/create/main.go --name {{.CLI_ARGS}}
+      - go run cmd/migrate/create/main.go --name {{.CLI_ARGS}}
