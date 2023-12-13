@@ -2,7 +2,7 @@ name: Discord Notification on PR
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 
 jobs:
   discord_notification:
@@ -14,10 +14,4 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: >
-            ${{ github.actor }}さんが以下のPRを出しました。
-
             ${{ github.event.pull_request.html_url }}
-
-            ${{ github.event.pull_request.title }}
-
-            ${{ github.event.pull_request.body }}
