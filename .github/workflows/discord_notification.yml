@@ -13,4 +13,8 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "A pull request was ${{ github.event.action }} by ${{ github.actor }}. Link: ${{ github.event.pull_request.html_url }}"
+          args: >
+            ${{ github.actor }}さんが以下のPRを出しました。
+            ${{ github.event.pull_request.html_url }}
+            ${{ github.event.pull_request.title }}
+            ${{ github.event.pull_request.body }}
