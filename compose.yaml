@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: app
     ports:
       - "${APP_HOST_PORT}:${APP_CONTAINER_PORT}"
     depends_on:
@@ -28,6 +29,19 @@ services:
       timeout: 3s
       retries: 5
       start_period: 1s
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: migrate
+    profiles:
+      - migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    entrypoint: ./migrate
 
 volumes:
   db-data:
