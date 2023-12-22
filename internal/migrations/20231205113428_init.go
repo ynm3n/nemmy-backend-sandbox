@@ -17,13 +17,13 @@ func init() {
 		}
 		if _, err := db.NewCreateTable().
 			Model((*models.Subject)(nil)).
-			WithForeignKeys().
+			ForeignKey(`("user_id") REFERENCES "users" ("id") ON DELETE CASCADE`).
 			Exec(ctx); err != nil {
 			return err
 		}
 		if _, err := db.NewCreateTable().
 			Model((*models.Record)(nil)).
-			WithForeignKeys().
+			ForeignKey(`("subject_id") REFERENCES "subjects" ("id") ON DELETE CASCADE`).
 			Exec(ctx); err != nil {
 			return err
 		}
