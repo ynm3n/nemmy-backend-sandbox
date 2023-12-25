@@ -2,7 +2,6 @@ package migrations
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/uptrace/bun"
 	"github.com/ynm3n/go-bun-exercise/internal/models"
@@ -17,17 +16,16 @@ func init() {
 		}
 		if _, err := db.NewCreateTable().
 			Model((*models.Subject)(nil)).
-			WithForeignKeys().
+			ForeignKey(`("user_id") REFERENCES "users" ("id") ON DELETE CASCADE`).
 			Exec(ctx); err != nil {
 			return err
 		}
 		if _, err := db.NewCreateTable().
 			Model((*models.Record)(nil)).
-			WithForeignKeys().
+			ForeignKey(`("subject_id") REFERENCES "subjects" ("id") ON DELETE CASCADE`).
 			Exec(ctx); err != nil {
 			return err
 		}
-		fmt.Println("マイグレーション完了")
 		return nil
 	}, func(ctx context.Context, db *bun.DB) error {
 		if _, err := db.NewDropTable().
