@@ -5,7 +5,7 @@ import "github.com/uptrace/bun"
 type Subject struct {
 	bun.BaseModel `bun:"table:subjects"`
 
-	ID          int64  `json:"-" bun:",pk,autoincrement"`
+	ID          int64  `json:"id" bun:",pk,autoincrement"`
 	UserID      int64  `json:"-"`
 	Name        string `json:"name" bun:",nullzero,notnull,type:varchar(255)"`
 	Description string `json:"description" bun:",type:text"`
