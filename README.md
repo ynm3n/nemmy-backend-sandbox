@@ -1,5 +1,5 @@
 # Requirement
-<!-- - Go -->
+- Go
 - Docker
 - Docker Compose
 - [Task](https://taskfile.dev/)
