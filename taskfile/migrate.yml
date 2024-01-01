@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Run all migrations that have not been applied yet.
+    cmds:
+      - docker compose run --rm migrate migrate
+
+  rollback:
+    cmds:
+      - docker compose run --rm migrate rollback
+
+  init:
+    cmds:
+      - docker compose run --rm migrate init
+
+  status:
+    cmds:
+      - docker compose run --rm migrate status
+
+  create:
+    desc: Create a bun migration file(Go). A migration name passed as an argument is required.
+    cmds:
+      - go run cmd/migrate/create/main.go --name {{.CLI_ARGS}}
