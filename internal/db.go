@@ -8,7 +8,7 @@ import (
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
-	migratepkg "github.com/uptrace/bun/migrate"
+	"github.com/uptrace/bun/migrate"
 
 	"github.com/ynm3n/go-bun-exercise/internal/migrations"
 )
@@ -27,7 +27,7 @@ func BuildDSN(cfg *Config) string {
 }
 
 func Migrate(ctx context.Context, db *bun.DB) error {
-	migrator := migratepkg.NewMigrator(db, migrations.Migrations)
+	migrator := migrate.NewMigrator(db, migrations.Migrations)
 	if err := migrator.Init(ctx); err != nil {
 		return fmt.Errorf("Migrate: %w", err)
 	}
