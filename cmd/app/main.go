@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 
 	"github.com/ynm3n/go-bun-exercise/internal"
 )
@@ -15,7 +14,6 @@ func main() {
 		log.Fatal(err)
 	}
 	if err := internal.RunApp(ctx, cfg); err != nil {
-		panic(err) // TODO: エラー処理
-		os.Exit(1)
+		log.Fatal(err)
 	}
 }
