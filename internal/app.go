@@ -5,12 +5,7 @@ import (
 	"fmt"
 )
 
-func RunApp(ctx context.Context) error {
-	cfg, err := GetConfig()
-	if err != nil {
-		return err
-	}
-
+func RunApp(ctx context.Context, cfg *Config) error {
 	db, err := NewDB(ctx, BuildDSN(cfg))
 	if err != nil {
 		return err
